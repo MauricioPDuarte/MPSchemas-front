@@ -22,7 +22,7 @@
 <style scoped>
   .container {
     margin: 0 0 30px 0;
-    width: 60%;
+    width: 100%;
     background: rgba(255, 255, 255, 0.09);
     border-radius: 5px;
     height: 72px;

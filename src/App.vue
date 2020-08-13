@@ -31,23 +31,6 @@
           <schema-card color-category="#1586C6"></schema-card>
           <schema-card color-category="#40A91B;"></schema-card>
           <schema-card color-category="#CF412E"></schema-card>
-          <schema-card color-category="#40A91B;"></schema-card>
-          <schema-card color-category="#1586C6"></schema-card>
-          <schema-card color-category="#D4D73B"></schema-card>
-          <schema-card color-category="#CF412E"></schema-card>
-          <schema-card color-category="#1586C6"></schema-card>
-          <schema-card color-category="#CF412E"></schema-card>
-          <schema-card color-category="#D4D73B"></schema-card>
-          <schema-card color-category="#1586C6"></schema-card>
-          <schema-card color-category="#40A91B;"></schema-card>
-          <schema-card color-category="#CF412E"></schema-card>
-          <schema-card color-category="#40A91B;"></schema-card>
-          <schema-card color-category="#1586C6"></schema-card>
-          <schema-card color-category="#D4D73B"></schema-card>
-          <schema-card color-category="#CF412E"></schema-card>
-          <schema-card color-category="#1586C6"></schema-card>
-          <schema-card color-category="#40A91B;"></schema-card>
-          <schema-card color-category="#CF412E"></schema-card>
         </div>
     </div>
   
@@ -77,9 +60,7 @@ export default {
 
   .containerApp {
     max-width: 1650px;
-    min-height: 10%;
     margin: 0 auto;
-    height: 100%;
     padding: 10px 15px;
 
     display: flex;
@@ -88,10 +69,9 @@ export default {
 
   .list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, 312px);
+    grid-template-columns: repeat(auto-fill, 322px);
     grid-gap: 12px;
     justify-content: center;
-    max-height: 60%;
     overflow: auto;
 
   }
