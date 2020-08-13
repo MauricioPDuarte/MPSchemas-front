@@ -25,7 +25,7 @@
     width: 100%;
     background: rgba(255, 255, 255, 0.09);
     margin-bottom: 40px;
-    padding
+    padding: 0 15px;
   }
 
   .dataNav {
