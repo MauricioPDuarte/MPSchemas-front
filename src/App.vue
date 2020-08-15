@@ -1,80 +1,25 @@
 <template>
-  <div id="app" class="">
-    <nav-bar></nav-bar>
-
-    <div class="containerApp">
-      <search-bar></search-bar>
-
-        <div class="list">
-          <schema-card color-category="#CF412E"></schema-card>
-          <schema-card color-category="#D4D73B"></schema-card>
-          <schema-card color-category="#1586C6"></schema-card>
-          <schema-card color-category="#40A91B;"></schema-card>
-          <schema-card color-category="#CF412E"></schema-card>
-          <schema-card color-category="#40A91B;"></schema-card>
-          <schema-card color-category="#1586C6"></schema-card>
-          <schema-card color-category="#D4D73B"></schema-card>
-          <schema-card color-category="#CF412E"></schema-card>
-          <schema-card color-category="#1586C6"></schema-card>
-          <schema-card color-category="#CF412E"></schema-card>
-          <schema-card color-category="#D4D73B"></schema-card>
-          <schema-card color-category="#1586C6"></schema-card>
-          <schema-card color-category="#40A91B;"></schema-card>
-          <schema-card color-category="#CF412E"></schema-card>
-          <schema-card color-category="#40A91B;"></schema-card>
-          <schema-card color-category="#1586C6"></schema-card>
-          <schema-card color-category="#D4D73B"></schema-card>
-          <schema-card color-category="#CF412E"></schema-card>
-          <schema-card color-category="#1586C6"></schema-card>
-          <schema-card color-category="#CF412E"></schema-card>
-          <schema-card color-category="#D4D73B"></schema-card>
-          <schema-card color-category="#1586C6"></schema-card>
-          <schema-card color-category="#40A91B;"></schema-card>
-          <schema-card color-category="#CF412E"></schema-card>
-        </div>
-    </div>
-  
-
+  <div id="app">
+    <NavBar />
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import SchemaCard from './components/SchemaCard';
-import SearchBar from './components/SearchBar';
-import NavBar from './components/NavBar';
+  import NavBar from './components/NavBar';
 
-export default {
-  name: 'App',
-  components: {
-    SchemaCard,
-    SearchBar,
-    NavBar
+  export default {
+    name: 'App',
+    components: {
+      NavBar
+    }
   }
-}
 </script>
 
 <style>
-  #app {
-    height: 100%;
-  }
-
-  .containerApp {
-    max-width: 1650px;
-    margin: 0 auto;
-    padding: 10px 15px;
-
-    display: flex;
-    flex-direction: column;
-  }
-
-  .list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 322px);
-    grid-gap: 12px;
-    justify-content: center;
-    overflow: auto;
-
-  }
+#app {
+  padding: 0 25px;
+}
 
 * {
   margin: 0;
@@ -87,12 +32,23 @@ export default {
 }
 
 html, body {
+  background: #121212;
+  height: 100%;
+}
+
+html * {
   font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #121212;
-  height: 100%;
- 
+}
+
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
 }
 
 /* SCROLL */ 
@@ -116,11 +72,6 @@ html, body {
   background: #121212; 
   border-radius: 10px;
   border: 2px solid rgba(255, 255, 255, 0.09);
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  
 }
 
 
