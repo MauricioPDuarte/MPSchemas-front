@@ -67,6 +67,10 @@
     font-weight: 600;
     cursor: pointer;
     transition: all .3s ease-in;
+    font-size: 12px;
+
+    display: flex;
+    align-items: center;
   }
 
   .btnAddSchema:hover {

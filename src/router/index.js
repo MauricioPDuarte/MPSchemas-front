@@ -1,16 +1,27 @@
 import Vue from 'vue';
-import Router from 'vue-router';
+import VueRouter from 'vue-router';
 
-import ListSchemas from "../Views/ListSchemas";
+import ListSchemas from "../views/ListSchemas";
+import SignIn from "../views/SignIn";
 
-Vue.use(Router);
+Vue.use(VueRouter);
 
 const routes = [
     {
-        name: "Lista Esquemas",
-        path: "",
-        component: ListSchemas
+        path: "/",
+        name:"Home",
+        component: ListSchemas,
+
+    },
+    {
+        path: "/login",
+        name:"SignIn",
+        component: SignIn
     },
 ]
 
-export default new Router({ routes });
+export default new VueRouter({ 
+    mode: "history",
+    routes,
+    base: process.env.BASE_URL
+ });
