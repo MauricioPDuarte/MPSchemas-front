@@ -18,8 +18,9 @@
 
 <style>
 #app {
-  padding: 0 25px;
+  
 }
+
 
 * {
   margin: 0;
@@ -31,7 +32,7 @@
   outline: none;
 }
 
-html, body {
+body {
   background: #121212;
   height: 100%;
 }
@@ -40,6 +41,7 @@ html * {
   font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
 }
 
 

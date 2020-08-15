@@ -58,7 +58,6 @@
     display: none;
 
     font-weight: 700;
-    font-size: 14px;
   }
 
 
