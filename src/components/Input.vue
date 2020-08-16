@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <input v-bind="$attrs" />
+    <input v-bind="$attrs" type="text" v-on:input="updateInput($event)"/>
 
   </div>
 </template>
@@ -9,17 +9,17 @@
   export default {
     name: "Input",
     inheritAttrs: false,
-    data: () => {
 
-    },
     props: {
         icon: {
             type: String,
             required: false
         }
     },
-    computed: {
-
+    methods: {
+      updateInput (event) {
+        this.$emit('input', event.target.value);
+      }
     }
   }
 </script>

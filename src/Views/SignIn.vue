@@ -3,11 +3,13 @@
       <div class="blockSignIn">
         <h1>MPSchemas</h1>
         <p>Faça download de diversos esquemas elétricos, cadastre novos e colabore com a comunidade. </p>
-        <Input placeholder="Email" />
-        <Input placeholder="Senha" type="password" />
-        <button class="mpBtnPrimary">Entrar</button>
+        <Input placeholder="Email" type="text" v-model="email" />
+        <Input placeholder="Senha" type="password" v-model="password" />
+        <Button>Entrar</Button>
         <span>----- OU -----</span>
         <a>CADASTRAR-SE</a>
+        {{ email }}
+        {{ password }}
       </div>
       <div class="triangle"></div>
 
@@ -16,18 +18,24 @@
 
 <script>
     import Input from '../components/Input';
+    import Button from '../components/Button';
+
+    var data = {
+        email: "",
+        password: "",
+    }
 
     export default {
         name: 'SignIn',
+        data: () => data,
         components: {
             Input,
+            Button,
         }
     }
 </script>
 
 <style scoped>
-    .containerSignIn {
-    }
 
     .blockSignIn {
         position: fixed;
@@ -85,16 +93,6 @@
 
         font-weight: 600;
     }
-
-    .mpInput {
-        width: 100%;
-        height: 60px;
-        padding: 10px 15px;
-        border-radius: 5px;
-        background: rgba(255, 255, 255, 0.1);
-        margin-bottom: 10px;
-    }
-
 
     .triangle {
         width: 100%;
