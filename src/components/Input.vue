@@ -11,10 +11,10 @@
     inheritAttrs: false,
 
     props: {
-        icon: {
-            type: String,
-            required: false
-        }
+      icon: {
+          type: String,
+          required: false
+      }
     },
     methods: {
       updateInput (event) {

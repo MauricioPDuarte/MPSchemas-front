@@ -3,26 +3,24 @@
       <div class="blockSignIn">
         <h1>MPSchemas</h1>
         <p>Faça download de diversos esquemas elétricos, cadastre novos e colabore com a comunidade. </p>
-        <Input placeholder="Email" type="text" v-model="email" />
-        <Input placeholder="Senha" type="password" v-model="password" />
-        <Button>Entrar</Button>
+        <Input placeholder="Email" type="text" v-model="user.email" />
+        <Input placeholder="Senha" type="password" v-model="user.password" />
+        <Button >Entrar</Button>
+        
         <span>----- OU -----</span>
         <a>CADASTRAR-SE</a>
-        {{ email }}
-        {{ password }}
       </div>
       <div class="triangle"></div>
-
   </div>
 </template>
 
 <script>
     import Input from '../components/Input';
     import Button from '../components/Button';
+    import User from '../models/User';
 
     var data = {
-        email: "",
-        password: "",
+        user: new User("", ""),
     }
 
     export default {
@@ -31,6 +29,31 @@
         components: {
             Input,
             Button,
+        },
+        computed: {
+            loggedIn() {
+                return this.$store.state.auth.status.loggedIn;
+            }
+        },
+        created() {
+            if (this.loggedIn) {
+                this.$router.push('/');
+            }
+        },
+        methods: {
+            handleLogin() {
+                console.log('AQ');
+                if(this.user.email && this.user.password) {
+                    this.$store.dispatch('auth/login', this.user).then(
+                        () => {
+                            this.$router.push('/');
+                        },
+                        error => {
+                            console.log(error);
+                        }
+                    )
+                }
+            }
         }
     }
 </script>
