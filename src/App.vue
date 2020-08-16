@@ -1,17 +1,17 @@
 <template>
   <div id="app">
-    <NavBar />
+    <!--<NavBar /> -->
     <router-view />
   </div>
 </template>
 
 <script>
-  import NavBar from './components/NavBar';
+//- import NavBar from './components/NavBar';
 
   export default {
     name: 'App',
     components: {
-      NavBar
+      //NavBar
     }
   }
 </script>
@@ -37,8 +37,12 @@ html * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 16px;
+  color: rgba(255, 255, 255, 0.8);
 }
 
+button, a {
+  cursor: pointer;
+}
 
 a {
   text-decoration: none;
