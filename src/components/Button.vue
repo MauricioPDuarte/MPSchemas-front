@@ -1,10 +1,7 @@
 <template>
-  <div class="container">
-    <button v-bind="$attrs">
+    <button v-bind="$attrs" type="button">
         <slot></slot>
     </button>
-
-  </div>
 </template>
 
 <script>
@@ -21,16 +18,11 @@
 </script>
 
 <style scoped>
-    .container {
+    button {
         width: 100%;
         height: 60px;
         background: #374772;
         border-radius: 5px;
-    }
-
-    .container button {
-        width: 100%;
-        height: 100%;
         font-weight: 600;
     }
 

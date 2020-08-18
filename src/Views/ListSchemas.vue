@@ -50,9 +50,13 @@
 <script>
   import SchemaCard from '../components/SchemaCard';
   import SearchBar from '../components/SearchBar';
+  import SchemaSevice from '../services/schema.service';
 
   export default {
     name: 'ListSchemas',
+    created(){
+      SchemaSevice.getSchemas().then((response) => console.log(response));
+    },
     components: {
       SchemaCard,
       SearchBar

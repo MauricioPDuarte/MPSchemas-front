@@ -5,7 +5,7 @@
         <p>Faça download de diversos esquemas elétricos, cadastre novos e colabore com a comunidade. </p>
         <Input placeholder="Email" type="text" v-model="user.email" />
         <Input placeholder="Senha" type="password" v-model="user.password" />
-        <Button >Entrar</Button>
+        <Button @click.native="handleLogin">Entrar</Button>
         
         <span>----- OU -----</span>
         <a>CADASTRAR-SE</a>
@@ -42,7 +42,6 @@
         },
         methods: {
             handleLogin() {
-                console.log('AQ');
                 if(this.user.email && this.user.password) {
                     this.$store.dispatch('auth/login', this.user).then(
                         () => {

@@ -6,9 +6,11 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCloudDownloadAlt  } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { ValidationProvider } from 'vee-validate';
+import Toasted from 'vue-toasted';
 
 library.add(faCloudDownloadAlt);
 
+Vue.use(Toasted);
 
 Vue.config.productionTip = false;
 

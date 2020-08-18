@@ -1,15 +1,14 @@
-import axios from 'axios';
+import api from './api';
 
 class AuthService {
     login(user) {
-        return axios
-            .post("https://localhost:44357/sessions", user)
-            .then(res => {
-                if (res.data.token) {
-                    localStorage.setItem('user', JSON.stringify(res.data));
+        return api.post("/sessions", user)
+            .then(response => {
+                if (response && response.data.token) {
+                    localStorage.setItem('user', JSON.stringify(response.data));
                 }
 
-                return res.data;
+                return response.data;
             });
     }
 
