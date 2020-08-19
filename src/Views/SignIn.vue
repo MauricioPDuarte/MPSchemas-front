@@ -3,12 +3,13 @@
       <div class="blockSignIn">
         <h1>MPSchemas</h1>
         <p>Faça download de diversos esquemas elétricos, cadastre novos e colabore com a comunidade. </p>
-        <Input placeholder="Email" type="text" v-model="user.email" />
-        <Input placeholder="Senha" type="password" v-model="user.password" />
-        <Button @click.native="handleLogin">Entrar</Button>
+        <Input placeholder="Email" type="text" v-model="credentialsDTO.email" :icon="'envelope'"/>
+        <Input placeholder="Senha" type="password" v-model="credentialsDTO.password" :icon="'lock'" />
+        <Button @click.native="handleLogin" :loading="loading">Entrar</Button>
+            
         
-        <span>----- OU -----</span>
-        <a>CADASTRAR-SE</a>
+        <span>━━━━ OU ━━━━</span>
+        <router-link to="/cadastrar">CADASTRAR-SE</router-link>
       </div>
       <div class="triangle"></div>
   </div>
@@ -17,10 +18,11 @@
 <script>
     import Input from '../components/Input';
     import Button from '../components/Button';
-    import User from '../models/User';
+    import CredentialsDTO from '../models/CredentialsDTO';
 
     var data = {
-        user: new User("", ""),
+        credentialsDTO: new CredentialsDTO("", ""),
+        loading: false,
     }
 
     export default {
@@ -28,7 +30,7 @@
         data: () => data,
         components: {
             Input,
-            Button,
+            Button
         },
         computed: {
             loggedIn() {
@@ -42,13 +44,16 @@
         },
         methods: {
             handleLogin() {
-                if(this.user.email && this.user.password) {
-                    this.$store.dispatch('auth/login', this.user).then(
+                if(this.credentialsDTO.email && this.credentialsDTO.password) {
+                    this.loading = true;
+
+                    this.$store.dispatch('auth/login', this.credentialsDTO).then(
                         () => {
                             this.$router.push('/');
+                            this.loading = false;
                         },
-                        error => {
-                            console.log(error);
+                        () => {
+                            this.loading = false
                         }
                     )
                 }
@@ -67,7 +72,6 @@
         width: 350px;
         background: linear-gradient(0deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.06)), #121212;
         padding: 10px 15px;
-
         display: flex;
         align-items: center;
         flex-direction: column;
@@ -96,7 +100,7 @@
 
     .blockSignIn span {
         text-align: center;
-        margin: 30px 0;
+        margin: 20px 0;
         
     }
 
@@ -121,6 +125,8 @@
         height: 100vh;
         background-color: rgba(255, 255, 255, 0.02);
         clip-path: polygon(100% 100%, 0 100%, 100% 0);
+        z-index: -9999;
+        position: absolute;
     }
 
 </style>

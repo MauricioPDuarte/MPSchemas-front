@@ -1,12 +1,7 @@
 <template>
   <div class="container">
     <input placeholder="Digite o modelo da placa mãe" />
-
-  
     <button><i class="fas fa-search iconBtnFind"></i><span class="textBtnFind">PESQUISAR</span></button>
-
-
-
   </div>
 </template>
 

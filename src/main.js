@@ -3,12 +3,12 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCloudDownloadAlt  } from '@fortawesome/free-solid-svg-icons'
+import { faCloudDownloadAlt, faEnvelope, faLock  } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { ValidationProvider } from 'vee-validate';
 import Toasted from 'vue-toasted';
 
-library.add(faCloudDownloadAlt);
+library.add(faCloudDownloadAlt, faEnvelope, faLock);
 
 Vue.use(Toasted);
 

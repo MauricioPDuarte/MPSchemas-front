@@ -8,7 +8,6 @@ const api = axios.create({
 
 
 api.interceptors.request.use((config) => {
-  console.log(authHeader());
   config.headers.Authorization = authHeader();
 
   return config;

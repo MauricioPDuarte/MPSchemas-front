@@ -52,8 +52,6 @@
     flex-direction: column;
     justify-content: space-between;
     cursor: pointer;
-
-
   }
 
   .infoSchema h3{

@@ -3,21 +3,26 @@ import VueRouter from 'vue-router';
 
 import ListSchemas from "../views/ListSchemas";
 import SignIn from "../views/SignIn";
+import SignUp from "../views/SignUp";
 
 Vue.use(VueRouter);
 
 const routes = [
     {
-        path: "/",
-        name:"Home",
-        component: ListSchemas,
-
+      path: "/",
+      name:"Home",
+      component: ListSchemas,
     },
     {
-        path: "/login",
-        name:"SignIn",
-        component: SignIn
+      path: "/login",
+      name:"SignIn",
+      component: SignIn
     },
+    {
+      path: "/cadastrar",
+      name:"SignUp",
+      component: SignUp
+  },
 ]
 
 
@@ -28,7 +33,7 @@ const router = new VueRouter({
  });
 
  router.beforeEach((to, from, next) => {
-    const publicPages = ['/login'];
+    const publicPages = ['/login', '/cadastrar'];
     const authRequired = !publicPages.includes(to.path);
     const loggedIn = localStorage.getItem('user');
   

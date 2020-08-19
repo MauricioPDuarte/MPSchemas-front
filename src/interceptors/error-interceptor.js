@@ -18,7 +18,13 @@ export default (error) => {
                 router.push('/login');
             }
             break;
+        case 403:
+            
+            break;
         default: 
             console.log('error padrao');
+
+            
     }
-} 
+}
+
