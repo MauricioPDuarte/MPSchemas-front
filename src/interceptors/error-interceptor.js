@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import router from '../router';
 import store from '../store';
 
@@ -11,9 +10,7 @@ export default (error) => {
             console.log('404');
             break;
         case 401: 
-            if(message){
-                Vue.toasted.error(message, {duration: 5000, iconPack: 'fontawesome', icon: 'exclamation-triangle'  });
-            }else {
+            if(!message){
                 store.dispatch('auth/logout');
                 router.push('/login');
             }
@@ -24,7 +21,7 @@ export default (error) => {
         default: 
             console.log('error padrao');
 
-            
-    }
+        }
+        return Promise.reject(error);
 }
 

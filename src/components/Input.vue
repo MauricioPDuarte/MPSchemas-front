@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <font-awesome-icon class="icon" :icon="[typeIcon, icon]" v-show="icon !== null" />
-    <input v-bind="$attrs" type="text" v-on:input="updateInput($event)"/>
+    <font-awesome-icon class="icon" :icon="[typeIcon, icon]" v-if="icon !== null" />
+    <input v-bind="$attrs" v-on:input="updateInput($event)"/>
   </div>
 </template>
 

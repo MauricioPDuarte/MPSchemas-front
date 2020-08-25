@@ -3,12 +3,13 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCloudDownloadAlt, faEnvelope, faLock  } from '@fortawesome/free-solid-svg-icons'
+import { faCloudDownloadAlt, faEnvelope, faLock, faUser, faPhone, faArrowLeft  } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { ValidationProvider } from 'vee-validate';
 import Toasted from 'vue-toasted';
+import vuetify from './plugins/vuetify';
 
-library.add(faCloudDownloadAlt, faEnvelope, faLock);
+library.add(faCloudDownloadAlt, faEnvelope, faLock, faUser, faPhone, faArrowLeft );
 
 Vue.use(Toasted);
 
@@ -20,5 +21,6 @@ Vue.component('ValidationProvider', ValidationProvider);
 new Vue({
   render: h => h(App),
   router,
-  store
+  store,
+  vuetify
 }).$mount('#app');

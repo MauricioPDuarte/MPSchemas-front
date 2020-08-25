@@ -1,55 +1,68 @@
 <template>
   <div class="containerSignUp">
       <div class="blockSignUp">
-          <h1>Cadastrar-se</h1>
+        <div class="iconBackPage">
+        <a><font-awesome-icon icon="arrow-left" /></a>
+        </div>
+        <h1>Cadastrar-se</h1>
+    
+            <Steps>
+                <Step />
+                <StepDivider />
+                <Step />
+                <StepDivider />
+                <Step />
+            </Steps>
 
-          <div class="bar">
-            <div class="circle" v-on:click="handleChangeScreen(screens.person)">
-                <div class="circleActive"></div> <!-- DESATIVAR SE NAO CHEGOU AQUI -->
+          <div class="block" id="person" v-show="screens.person.blockForm">
+            <Input placeholder="Nome" type="text" :icon="'user'" />
+            <Input placeholder="Email" type="text" :icon="'envelope'"/>
+            <div class="phone">
+                <div class="dddPhone"><Input placeholder="DDD" type="text" :icon="'phone'"/></div>
+                <Input placeholder="Celular" type="text" />
             </div>
-            <div class="circle" v-on:click="handleChangeScreen(screens.address)">
-                <div class="circleActive"></div> <!-- DESATIVAR SE NAO CHEGOU AQUI -->
-            </div>
-            <div class="circle">
-                <div class="circleActive" ></div> <!-- DESATIVAR SE NAO CHEGOU AQUI -->
-            </div>
+            <Input placeholder="CPF" type="text" :icon="'envelope'"/>
+            <Input placeholder="Senha" type="text" :icon="'lock'"/>
+            <Input placeholder="Confirmar Senha" type="text" :icon="'lock'"/>
 
-            <div class="barProgress" :style="progess"></div>
+            <Button @click.native="handleChangeScreen(screens.address)">Próximo</Button>
           </div>
+          <div class="block" id="address" v-show="screens.address.blockForm">
+            <Input placeholder="CEP" type="text" :icon="'envelope'"/>
+            <Input placeholder="Rua" type="text" :icon="'lock'"/>
+            <Input placeholder="Bairro" type="text" :icon="'lock'"/>
+            <Input placeholder="Complemento" type="text" :icon="'lock'"/>
+            <Input placeholder="Número" type="text" :icon="'lock'"/>
+            <Input placeholder="Cidade" type="text" :icon="'lock'"/>
 
-          <div class="block" id="person" v-show="screens.person.active">
-            <Input placeholder="Email" type="text" :icon="'envelope'" />
-            <Input placeholder="Email" type="text" :icon="'envelope'"/>
-            <Input placeholder="Email" type="text" :icon="'envelope'"/>
-            <Input placeholder="Email" type="text" :icon="'envelope'"/>
-            <Input placeholder="Email" type="text" :icon="'envelope'"/>
-            <Input placeholder="Email" type="text" :icon="'envelope'"/>
+            <Button>Cadastrar</Button>
           </div>
-          <div class="block" id="address" v-show="screens.address.active">
-              ENDERECO
-          </div>
-          <div class="block" id="result" v-show="screens.result.active">
+          <div class="block" id="result" v-show="screens.result.blockForm">
 
           </div>
-          <Button @click.native="handleLogin">Entrar</Button>
+          
       </div>
-      <div class="triangle"></div>
+
   </div>
 </template>
 
 <script>
     import Input from '../components/Input';
     import Button from '../components/Button';
+    import Steps from '../components/Steps';
+    import Step from '../components/Step';
+    import StepDivider from '../components/StepDivider';
     //import User from '../models/User';
 
     let screens = {
-        person: { active: false, name: "person" },
-        address: { active: false, name: "address" },
-        result: { active: false, name: "result" },
+        person: { active: false, blockForm: false, name: "person", progess: 0 },
+        address: { active: false, blockForm: false, name: "address", progess: 6 },
+        result: { active: false, blockForm: false, name: "result", progess: 80 },
     }
 
     var data = {
-        screens
+        screens,
+        progessLevel: 0
     }
 
 
@@ -59,6 +72,9 @@
         components: {
             Input,
             Button,
+            Steps,
+            Step,
+            StepDivider
         },
         computed: {
             loggedIn: function () {
@@ -75,16 +91,31 @@
                 this.$router.push('/');
             }
 
+        this.handleChangeScreen(screens.person);
+
         },
         methods: {
             handleChangeScreen: function (screenChange) {
-                Object.values(this.screens).forEach(screen => {
-                    if(screenChange.name == screen.name) {
-                        screen.active = true;
-                    }else {
-                        screen.active = false;
-                    }
-                });
+                switch(screenChange.name) {
+                    case screens.person.name:
+                        screens.address.active = false;
+                        screens.address.blockForm = false;
+
+                        screens.person.active = true;
+                        screens.person.blockForm = true;
+
+                        this.progessLevel = screens.person.progess;
+                        break;
+
+                    case screens.address.name:
+                        screens.address.active = true;
+                        screens.address.blockForm = true;
+
+                        screens.person.blockForm = false;
+
+                        this.progessLevel = screens.address.progess;
+                        break;
+                }
             }
         }
             
@@ -92,10 +123,8 @@
 </script>
 
 <style scoped>
+
     .blockSignUp {
-        position: fixed;
-        left: 0%;
-        right: 0;
         margin: 70px auto 0 auto;
         width: 350px;
         background: linear-gradient(0deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.06)), #121212;
@@ -114,12 +143,26 @@
 
     
     .blockSignUp h1 {
-        margin-bottom: 15px;
+        margin-bottom: 35px;
         font-size: 30px;
     }
 
     .block {
         width: 100%;
+    }
+
+    .phone {
+        display: flex;
+    }
+
+    .dddPhone {
+        width: 60%;
+        margin-right: 10px;
+    }
+
+    .iconBackPage {
+        width: 100%;
+        float: left;
     }
 
     /* ==== PROGRESS ==== */
@@ -152,22 +195,11 @@
 
     .barProgress {
         position: absolute;
-        /*width: 40%; /* ALTERAR ISSO AQUI */
         background: #374772;
         height: 20px;
+        right: 1000px;
         border-radius: 10px;
-        left: 40px;
 
     }
-
-    .triangle {
-        width: 100%;
-        height: 100vh;
-        background-color: rgba(255, 255, 255, 0.02);
-        clip-path: polygon(100% 100%, 0 100%, 100% 0);
-        z-index: -9999;
-        position: absolute;
-    }
-
 </style>
 

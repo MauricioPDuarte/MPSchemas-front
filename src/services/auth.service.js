@@ -3,13 +3,18 @@ import api from './api';
 class AuthService {
     login(user) {
         return api.post("/sessions", user)
-            .then(response => {
+            .then(
+                (response) => {
                 if (response && response.data.token) {
-                    localStorage.setItem('user', JSON.stringify(response.data));
+                    localStorage.setItem('user', JSON.stringify(response.data))
                 }
 
                 return response.data;
-            });
+            }).catch(error => {
+                console.log('VV AUTH SERVICE VV')
+                console.log(error);
+                return Promise.reject(error);
+            })
     }
 
     logout() {
