@@ -16,13 +16,12 @@ export const auth = {
                     return Promise.resolve(user);
                 },
                 error => {
-                    console.log('VV STORAGE VV')
-                    console.log(error);
                     commit('loginFailure');
                     return Promise.reject(error);
                 }
             );
         },
+
         logout({ commit }) {
             AuthService.logout();
             commit('logout');
