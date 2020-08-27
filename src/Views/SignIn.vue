@@ -1,9 +1,9 @@
 <template>
-    <v-container fluid>
+    <v-container>
         <v-row align="center"
             justify="center">
-            <v-col cols="12" sm="4" md="4" xl="2">
-                <v-sheet class="pa-10">
+            <v-col cols="12" sm="4" md="4" lg="3" >
+                <v-sheet class="pa-10" elevation="6">
                     <v-alert v-show="errorMsg != ''" type="error" color="red" border="left" dismissible>{{errorMsg}}</v-alert>
                     <h1 class="text-center">MPShemas</h1>
                     <p class="text-center text--secondary mb-10">Faça download de diversos esquemas elétricos, cadastre novos e colabore com a comunidade.</p>
