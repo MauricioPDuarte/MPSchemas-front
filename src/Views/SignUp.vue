@@ -9,6 +9,8 @@
                             <v-icon>mdi-arrow-left</v-icon>
                         </v-btn>
 
+                        <v-alert v-show="errorMsg != ''" type="error" color="red" border="left" dismissible>{{errorMsg}}</v-alert>
+                        
                         <h1 class="text-center mb-5">Cadastrar-se</h1>
 
                         <v-stepper alt-labels v-model="e1">
@@ -219,15 +221,6 @@
                                                 </v-col>
                                             </v-row>
 
-                                            <v-btn
-                                                outlined 
-                                                block
-                                                x-large
-                                                color="primary"
-                                                class="mb-3"
-                                            >
-                                            Voltar
-                                            </v-btn>
 
                                             <v-btn
                                                 block
@@ -238,6 +231,18 @@
                                             >
                                             Cadastrar
                                             </v-btn>
+
+                                            <v-btn
+                                                outlined 
+                                                block
+                                                x-large
+                                                color="primary"
+                                                class="mt-3"
+                                                @click="e1 = 1"
+                                            >
+                                            Voltar
+                                            </v-btn>
+
 
                                         </v-form>
                                     </ValidationObserver>
@@ -254,7 +259,7 @@
 <script>
     import User from '../models/User';
     import { ValidationObserver }  from 'vee-validate';
-
+    import UserService from '../services/user.service';
 
     var data = {
         e1: 1,
@@ -263,6 +268,7 @@
         showConfirmPassword: false,
         showPassword: false,
         confirmation: "",
+        errorMsg: ""
       
     }
 
@@ -282,7 +288,20 @@
         },
         methods: {
            handleRegister() {
-               
+               this.loading = true;
+               UserService.register(this.user)
+               .then(
+                   (response) => {
+                        console.log(response);
+                        this.$router.push('/login');
+                        this.loading = false;
+                   },
+                   (error) => {
+                       this.errorMsg = error.response.data.message;
+                       this.loading = false;
+                   }
+               )
+
            }
         }
             

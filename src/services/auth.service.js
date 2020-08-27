@@ -11,8 +11,6 @@ class AuthService {
 
                 return response.data;
             }).catch(error => {
-                console.log('VV AUTH SERVICE VV')
-                console.log(error);
                 return Promise.reject(error);
             })
     }
