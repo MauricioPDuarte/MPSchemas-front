@@ -1,114 +1,492 @@
 <template>
-  <div class="containerListSchemas">
-    <div class="containerSearch">
-      <SearchBar />
+  <v-container>
+
+    <v-sheet class="d-flex searchbar" >
+      <v-text-field
+        placeholder="Digite o modelo da placa mãe"
+        solo
+        hide-details
+        height="80px"
+        
+      ></v-text-field>
+      <v-btn color="primary" height="auto" width="250px">PESQUISAR</v-btn>
+    </v-sheet>
+
+    <div class="grid mt-5">
+
+      <v-card elevation="2" v-for="schema in schemas" :key="schema.id" :style="'border-left: 7px solid ' + schema.category.color" class="d-flex flex-row justify-space-between">
+        <div>
+          <v-card-title>{{schema.name}}</v-card-title>
+          <v-card-subtitle class="font-weight-light text--secondary">{{schema.category.name}}</v-card-subtitle>
+
+          <v-list-item class="grow">
+            <v-list-item-avatar color="grey darken-3">
+              <v-img
+                class="elevation-6"
+                src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+              ></v-img>
+
+            </v-list-item-avatar>
+            <v-list-item-content>
+              <v-list-item-title class="caption">{{ schema.user.name }}</v-list-item-title>
+              <v-list-item-subtitle class="caption">{{ schema.user.email }}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+
+        </div>
+        <div class="d-flex flex-column align-center justify-center mr-2">
+            <v-btn icon x-small class="mb-3">
+              <v-icon color="red">mdi-alert-outline</v-icon>
+            </v-btn>
+
+            <v-btn icon color="primary" x-small class="mb-3">
+              <v-icon>mdi-heart</v-icon>
+            </v-btn>
+
+            
+            <v-btn icon x-small>
+              <v-icon>mdi-download</v-icon>
+            </v-btn>
+        </div>
+
+      </v-card>
+
     </div>
 
-    <div class="listSchemas">
-      <SchemaCard color-category="#CF412E"/>
-      <SchemaCard color-category="#D4D73B"/>
-      <SchemaCard color-category="#1586C6"/>
-      <SchemaCard color-category="#CF412E"/>
-      <SchemaCard color-category="#1586C6"/>
-      <SchemaCard color-category="#D4D73B"/>
-      <SchemaCard color-category="#CF412E"/>
-      <SchemaCard color-category="#D4D73B"/>
-      <SchemaCard color-category="#1586C6"/>
-      <SchemaCard color-category="#CF412E"/>
-      <SchemaCard color-category="#1586C6"/>
-      <SchemaCard color-category="#D4D73B"/>
-      <SchemaCard color-category="#CF412E"/>
-      <SchemaCard color-category="#D4D73B"/>
-      <SchemaCard color-category="#1586C6"/>
-      <SchemaCard color-category="#CF412E"/>
-      <SchemaCard color-category="#1586C6"/>
-      <SchemaCard color-category="#D4D73B"/>
-      <SchemaCard color-category="#CF412E"/>
-      <SchemaCard color-category="#D4D73B"/>
-      <SchemaCard color-category="#1586C6"/>
-      <SchemaCard color-category="#CF412E"/>
-      <SchemaCard color-category="#1586C6"/>
-      <SchemaCard color-category="#D4D73B"/>
-      <SchemaCard color-category="#CF412E"/>
-      <SchemaCard color-category="#D4D73B"/>
-      <SchemaCard color-category="#1586C6"/>
-      <SchemaCard color-category="#CF412E"/>
-      <SchemaCard color-category="#1586C6"/>
-      <SchemaCard color-category="#D4D73B"/>
-      <SchemaCard color-category="#CF412E"/>
-      <SchemaCard color-category="#D4D73B"/>
-      <SchemaCard color-category="#1586C6"/>
-      <SchemaCard color-category="#CF412E"/>
-      <SchemaCard color-category="#1586C6"/>
-      <SchemaCard color-category="#D4D73B"/>
-    </div>
-
-    <a class="btnBackTop" href="#list"><i class="fas fa-arrow-up"></i></a>
-  </div>
+  </v-container>
 </template>
 
 <script>
-  import SchemaCard from '../components/SchemaCard';
-  import SearchBar from '../components/SearchBar';
   import SchemaSevice from '../services/schema.service';
+
+
+  var data = {
+    schemas: [
+      {
+        id: 0,
+        name: "ASUS GAMER G7UUIDFA",
+        url: "",
+        category: {
+          id: 0,
+          name: "Notebook",
+          color: "#CF412E"
+        },
+        user: {
+          id: 0,
+          name: "Mauricio Pruss Duarte",
+          email: "prussdev@gmail.com",
+          avatar: "",
+        }
+      },
+      {
+        id: 0,
+        name: "ASUS GAMER G7UUIDFA",
+        url: "",
+        category: {
+          id: 2,
+          name: "Notebook",
+          color: "#5C45B8"
+        },
+        user: {
+          id: 1,
+          name: "Mauricio Pruss Duarte",
+          email: "prussdev@gmail.com",
+          avatar: "",
+        }
+      },
+      {
+        id: 0,
+        name: "ASUS GAMER G7UUIDFA",
+        url: "",
+        category: {
+          id: 2,
+          name: "Notebook",
+          color: "#D4D73B"
+        },
+        user: {
+          id: 1,
+          name: "Mauricio Pruss Duarte",
+          email: "prussdev@gmail.com",
+          avatar: "",
+        }
+      },
+      {
+        id: 0,
+        name: "ASUS GAMER G7UUIDFA",
+        url: "",
+        category: {
+          id: 2,
+          name: "Notebook",
+          color: "#40A91B"
+        },
+        user: {
+          id: 1,
+          name: "Mauricio Pruss Duarte",
+          email: "prussdev@gmail.com",
+          avatar: "",
+        }
+      },
+      {
+        id: 0,
+        name: "ASUS GAMER G7UUIDFA",
+        url: "",
+        category: {
+          id: 2,
+          name: "Notebook",
+          color: "#D4D73B"
+        },
+        user: {
+          id: 1,
+          name: "Mauricio Pruss Duarte",
+          email: "prussdev@gmail.com",
+          avatar: "",
+        }
+      },
+      {
+        id: 0,
+        name: "ASUS GAMER G7UUIDFA",
+        url: "",
+        category: {
+          id: 2,
+          name: "Notebook",
+          color: "#5C45B8"
+        },
+        user: {
+          id: 1,
+          name: "Mauricio Pruss Duarte",
+          email: "prussdev@gmail.com",
+          avatar: "",
+        }
+      },
+      {
+        id: 0,
+        name: "ASUS GAMER G7UUIDFA",
+        url: "",
+        category: {
+          id: 2,
+          name: "Notebook",
+          color: "#5C45B8"
+        },
+        user: {
+          id: 1,
+          name: "Mauricio Pruss Duarte",
+          email: "prussdev@gmail.com",
+          avatar: "",
+        }
+      },
+      {
+        id: 0,
+        name: "ASUS GAMER G7UUIDFA",
+        url: "",
+        category: {
+          id: 2,
+          name: "Notebook",
+          color: "#CF412E"
+        },
+        user: {
+          id: 1,
+          name: "Mauricio Pruss Duarte",
+          email: "prussdev@gmail.com",
+          avatar: "",
+        }
+      },
+      {
+        id: 0,
+        name: "ASUS GAMER G7UUIDFA",
+        url: "",
+        category: {
+          id: 2,
+          name: "Notebook",
+          color: "#D4D73B"
+        },
+        user: {
+          id: 1,
+          name: "Mauricio Pruss Duarte",
+          email: "prussdev@gmail.com",
+          avatar: "",
+        }
+      },
+      {
+        id: 0,
+        name: "ASUS GAMER G7UUIDFA",
+        url: "",
+        category: {
+          id: 2,
+          name: "Notebook",
+          color: "#CF412E"
+        },
+        user: {
+          id: 1,
+          name: "Mauricio Pruss Duarte",
+          email: "prussdev@gmail.com",
+          avatar: "",
+        }
+      },
+      {
+        id: 0,
+        name: "ASUS GAMER G7UUIDFA",
+        url: "",
+        category: {
+          id: 2,
+          name: "Notebook",
+          color: "#40A91B"
+        },
+        user: {
+          id: 1,
+          name: "Mauricio Pruss Duarte",
+          email: "prussdev@gmail.com",
+          avatar: "",
+        }
+      },
+      {
+        id: 0,
+        name: "ASUS GAMER G7UUIDFA",
+        url: "",
+        category: {
+          id: 2,
+          name: "Notebook",
+          color: "#CF412E"
+        },
+        user: {
+          id: 1,
+          name: "Mauricio Pruss Duarte",
+          email: "prussdev@gmail.com",
+          avatar: "",
+        }
+      },
+      {
+        id: 0,
+        name: "ASUS GAMER G7UUIDFA",
+        url: "",
+        category: {
+          id: 2,
+          name: "Notebook",
+          color: "#40A91B"
+        },
+        user: {
+          id: 1,
+          name: "Mauricio Pruss Duarte",
+          email: "prussdev@gmail.com",
+          avatar: "",
+        }
+      },
+      {
+        id: 0,
+        name: "ASUS GAMER G7UUIDFA",
+        url: "",
+        category: {
+          id: 2,
+          name: "Notebook",
+          color: "#D4D73B"
+        },
+        user: {
+          id: 1,
+          name: "Mauricio Pruss Duarte",
+          email: "prussdev@gmail.com",
+          avatar: "",
+        }
+      },
+      {
+        id: 0,
+        name: "ASUS GAMER G7UUIDFA",
+        url: "",
+        category: {
+          id: 2,
+          name: "Notebook",
+          color: "#5C45B8"
+        },
+        user: {
+          id: 1,
+          name: "Mauricio Pruss Duarte",
+          email: "prussdev@gmail.com",
+          avatar: "",
+        }
+      },
+      {
+        id: 0,
+        name: "ASUS GAMER G7UUIDFA",
+        url: "",
+        category: {
+          id: 2,
+          name: "Notebook",
+          color: "#5C45B8"
+        },
+        user: {
+          id: 1,
+          name: "Mauricio Pruss Duarte",
+          email: "prussdev@gmail.com",
+          avatar: "",
+        }
+      },
+      {
+        id: 0,
+        name: "ASUS GAMER G7UUIDFA",
+        url: "",
+        category: {
+          id: 2,
+          name: "Notebook",
+          color: "#CF412E"
+        },
+        user: {
+          id: 1,
+          name: "Mauricio Pruss Duarte",
+          email: "prussdev@gmail.com",
+          avatar: "",
+        }
+      },
+      {
+        id: 0,
+        name: "ASUS GAMER G7UUIDFA",
+        url: "",
+        category: {
+          id: 2,
+          name: "Notebook",
+          color: "#D4D73B"
+        },
+        user: {
+          id: 1,
+          name: "Mauricio Pruss Duarte",
+          email: "prussdev@gmail.com",
+          avatar: "",
+        }
+      },
+      {
+        id: 0,
+        name: "ASUS GAMER G7UUIDFA",
+        url: "",
+        category: {
+          id: 2,
+          name: "Notebook",
+          color: "#CF412E"
+        },
+        user: {
+          id: 1,
+          name: "Mauricio Pruss Duarte",
+          email: "prussdev@gmail.com",
+          avatar: "",
+        }
+      },
+      {
+        id: 0,
+        name: "ASUS GAMER G7UUIDFA",
+        url: "",
+        category: {
+          id: 2,
+          name: "Notebook",
+          color: "#40A91B"
+        },
+        user: {
+          id: 1,
+          name: "Mauricio Pruss Duarte",
+          email: "prussdev@gmail.com",
+          avatar: "",
+        }
+      },
+      {
+        id: 0,
+        name: "ASUS GAMER G7UUIDFA",
+        url: "",
+        category: {
+          id: 2,
+          name: "Notebook",
+          color: "#CF412E"
+        },
+        user: {
+          id: 1,
+          name: "Mauricio Pruss Duarte",
+          email: "prussdev@gmail.com",
+          avatar: "",
+        }
+      },
+      {
+        id: 0,
+        name: "ASUS GAMER G7UUIDFA",
+        url: "",
+        category: {
+          id: 2,
+          name: "Notebook",
+          color: "#CF412E"
+        },
+        user: {
+          id: 1,
+          name: "Mauricio Pruss Duarte",
+          email: "prussdev@gmail.com",
+          avatar: "",
+        }
+      },
+      {
+        id: 0,
+        name: "ASUS GAMER G7UUIDFA",
+        url: "",
+        category: {
+          id: 2,
+          name: "Notebook",
+          color: "#CF412E"
+        },
+        user: {
+          id: 1,
+          name: "Mauricio Pruss Duarte",
+          email: "prussdev@gmail.com",
+          avatar: "",
+        }
+      },
+      {
+        id: 0,
+        name: "ASUS GAMER G7UUIDFA",
+        url: "",
+        category: {
+          id: 2,
+          name: "Notebook",
+          color: "#CF412E"
+        },
+        user: {
+          id: 1,
+          name: "Mauricio Pruss Duarte",
+          email: "prussdev@gmail.com",
+          avatar: "",
+        }
+      },
+    ]
+  };
 
   export default {
     name: 'ListSchemas',
+    data: () => data,
+
     created(){
       SchemaSevice.getSchemas().then((response) => console.log(response));
     },
+
     components: {
-      SchemaCard,
-      SearchBar
+      
+    },
+
+    computed: {
+      borderColorCard(color) {
+        return `border-left: 7px solid ${color}`;
+      }
     }
+
   }
 </script>
 
 <style scoped>
-  .containerListSchemas{
-    width: 100%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    padding: 0 25px;
-  }
 
-  .containerSearch {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-bottom: 25px;
-  }
 
-  .listSchemas {
+  .grid {
     display: grid;
     justify-content: center;
-    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     grid-gap: 16px;
   }
 
-  .btnBackTop {
-    background: linear-gradient(0deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.03)), rgba(66, 88, 142, 0.8);
-    box-shadow: 0px 0px 3px #121212;
-    width: 50px;
-    height: 50px;
-    z-index: 5000;
-    bottom: 20px;
-    right: 20px;
-    border-radius: 100%;
-    cursor: pointer;
-    font-size: 20px;
-    position: fixed;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: all .3s ease-in;
+  .searchbar {
+    border-radius: 5px 0 0 5px;
   }
 
-  .btnBackTop:hover {
-    background: linear-gradient(0deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.03)), rgba(66, 88, 142, 1);
+  .searchbar button {
+    border-radius: 0 5px 5px 0;
   }
-
 
 </style>
 

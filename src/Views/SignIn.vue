@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+    <v-container fill-height>
         <v-row align="center"
             justify="center">
             <v-col cols="12" sm="4" md="4" lg="3" >
@@ -78,7 +78,7 @@
                             this.loading = false;
                         },
                         (error) => {
-    
+                            console.log(error.response)
                             this.errorMsg = error.response.data.message;
                             this.loading = false
                         }
