@@ -4,6 +4,8 @@ import VueRouter from 'vue-router';
 import ListSchemas from "../views/ListSchemas";
 import SignIn from "../views/SignIn";
 import SignUp from "../views/SignUp";
+import Home from "../views/Home";
+import EditSchema from "../views/EditSchema";
 
 Vue.use(VueRouter);
 
@@ -11,7 +13,17 @@ const routes = [
     {
       path: "/",
       name:"Home",
-      component: ListSchemas,
+      component: Home,
+      children: [
+        {
+          path: '',
+          component: ListSchemas
+        },
+        {
+          path: '/esquema',
+          component: EditSchema
+        }
+      ]
     },
     {
       path: "/login",
