@@ -5,6 +5,7 @@ import ListSchemas from "../views/ListSchemas";
 import SignIn from "../views/SignIn";
 import SignUp from "../views/SignUp";
 import Home from "../views/Home";
+import UserSchemas from "../views/UserSchemas";
 import EditSchema from "../views/EditSchema";
 
 Vue.use(VueRouter);
@@ -21,6 +22,10 @@ const routes = [
         },
         {
           path: '/esquema',
+          component: UserSchemas
+        },
+        {
+          path: '/novoesquema',
           component: EditSchema
         }
       ]

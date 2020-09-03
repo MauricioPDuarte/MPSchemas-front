@@ -1,11 +1,11 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="12" xs="12" sm="12" md="12" xl="4" >
-        <v-sheet class="pa-7">
-          <h4>Novo esquema</h4>
-          <v-alert v-show="errorInsertSchemaMsg != ''" type="error" color="red" border="left" dismissible>{{errorInsertSchemaMsg}}</v-alert>
-          <ValidationObserver v-slot="{ invalid }">
+      <v-col cols="12" xl="5" md="5" >
+        <v-sheet class="pa-10" elevation="5">
+          <h1 class="mb-5">Novo esquema</h1>
+          
+          <ValidationObserver v-slot="{ invalid }" ref="form">
             <v-form>
               <ValidationProvider name="Descrição" rules="required" v-slot="{ errors }">
                 <v-text-field
@@ -29,108 +29,71 @@
                 <v-file-input
                   label="Esquema (PDF)"
                   v-model="file"
+                  @change="readURL()"
                   :error-messages="errors"
                 ></v-file-input>
               </ValidationProvider>
               <v-btn 
-                @click="handleSave" 
-                x-large block 
+                class="mt-2"
+                large 
                 color="primary" 
                 :loading="loadingForm"
-                :disabled="invalid">SALVAR
-              </v-btn>
+                :disabled="invalid"
+                @click="handleSave"
+                >
+                SALVAR
+                </v-btn>
             </v-form>
           </ValidationObserver>
-        </v-sheet> 
+        </v-sheet>
       </v-col>
-      <v-col>
-          <v-sheet class="pa-7">
-            <v-row align="center">
-              <v-col cols="12" xl="8" sm="6"><h4>Meus esquemas</h4></v-col>
-              <v-col>
-                <v-text-field
-                  append-icon="mdi-magnify"
-                  label="Descrição"
-                  single-line
-                  hide-details
-                  class="pa-0"
-                ></v-text-field>
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col>
-                <v-data-table 
-                  :headers="headers" 
-                  :items="schemas" 
-                  loading-text="Carregando" 
-                  no-data-text="Nenhum esquema cadastrado" 
-                  no-results-text="Nenhum esquema encontrado"
-                  :loading="loadingList"
-                  
-                >
-                  <template v-slot:[`item.category.name`]="{ item }">
-                    <v-chip  small :color="item.category.color">{{ item.category.name }}</v-chip>
-                  </template>
+      <v-col cols="12" md="7" xs="12">
+        <v-sheet class="pa-7" elevation="5">
+          <object :data="schemaDTO.urlPDFSchema ? schemaDTO.urlPDFSchema : pdfUrl" width="100%" height="700px" type="application/pdf"></object>
+        </v-sheet>
 
-                  <template v-slot:[`item.url`]="{ item }">
-                    <v-btn :href="item.url" color="primary" small><v-icon small>mdi-arrow-down</v-icon></v-btn>
-                  </template>
-
-                  <template v-slot:[`item.acoes`]="{ item }">
-                    <v-btn @click="console.log(item.id)" color="" icon small><v-icon small >mdi-pencil</v-icon></v-btn>
-                    <v-btn @click="console.log(item.id)" color="" icon small><v-icon small >mdi-delete</v-icon></v-btn>
-                  </template>
-                </v-data-table>
-              </v-col>
-            </v-row>
-            
-
-          </v-sheet>
       </v-col>
     </v-row>
-
   </v-container>
 </template>
 
 <script>
-  import SchemaService from '../services/schema.service';
-  import CategoryService from '../services/category.service';
   import SchemaDTO from '../models/SchemaDTO';
   import { ValidationObserver }  from 'vee-validate';
+  import SchemaService from '../services/schema.service';
+  import CategoryService from '../services/category.service';
 
   var data = {
-    headers: [
-      {
-        text: 'Descrição (Esquema)',
-        align: 'start',
-        sortable: true,
-        value: 'name',
-      },
-      { text: 'Categoria', value: 'category.name' },
-      { text: 'PDF', value: 'url' },
-      { text: 'Ações', value: 'acoes' },
-    ],
-    schemas: [],
-    categories: [],
     schemaDTO: new SchemaDTO('', ''),
     file: '',
-    loadingList: false,
+    pdfUrl: null,
+    categories: [],
     loadingForm: false,
-    errorInsertSchemaMsg: '',
   };
 
   export default {
     name: "EditSchema",
     data: () => data,
     components: {
-      ValidationObserver
+      ValidationObserver,
     },
-    mounted() {
-      this.handleListSchemas();
-      this.handleListCategories();
 
+    mounted() {
+      this.handleListCategories();
     },
+
     methods: {
+      readURL() {
+        this.pdfUrl = URL.createObjectURL(this.file);
+      },
+
+      handleListCategories() {
+        CategoryService.get()
+          .then(response => {
+              this.categories = response.data;
+        });
+      },
+
       handleSave() {
         this.loadingForm = true;
         
@@ -141,8 +104,10 @@
         SchemaService.insert(data)
           .then(() => {
             this.loadingForm = false;
-
-            this.handleListSchemas();
+            this.schemaDTO = new SchemaDTO('', '');
+            this.file = '';
+            this.pdfUrl = '';
+            this.$refs.form.reset();
           })
           .catch((error) => {
             this.loadingForm = false;
@@ -150,30 +115,10 @@
           })
       },
 
-      handleListSchemas() {
-        this.loadingList = true;
-
-        SchemaService.getByUser()
-          .then(reponse => {
-            this.schemas = reponse.data
-            this.loadingList = false;
-          })
-          .catch(() => {
-            this.loadingList = false;
-          })
-      },
-
-      handleListCategories() {
-        CategoryService.get()
-          .then(response => {
-            console.log(response.data)
-            console.log(response.data);
-              this.categories = response.data
-        });
-      }
     }
   }
 </script>
 
 <style scoped>
+
 </style>

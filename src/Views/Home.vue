@@ -5,7 +5,7 @@
         <v-toolbar-title>MPSchemas</v-toolbar-title>
         <v-spacer></v-spacer>
 
-        <v-btn color="primary" small class="mr-5 d-none d-sm-flex">
+        <v-btn color="primary" small class="mr-5 d-none d-sm-flex" to="esquema">
           MEUS ESQUEMAS
         </v-btn>
 

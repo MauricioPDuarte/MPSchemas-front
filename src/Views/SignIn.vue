@@ -2,7 +2,7 @@
     <v-container fill-height>
         <v-row align="center"
             justify="center">
-            <v-col cols="12" sm="4" md="4" lg="3" >
+            <v-col cols="12" sm="4" md="4" lg="4" xl="3">
                 <v-sheet class="pa-10" elevation="6">
                     <v-alert v-show="errorMsg != ''" type="error" color="red" border="left" dismissible>{{errorMsg}}</v-alert>
                     <h1 class="text-center">MPShemas</h1>
