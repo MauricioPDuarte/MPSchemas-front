@@ -1,5 +1,6 @@
 export default class SchemaDTO {
-  constructor(name, categoryId){
+  constructor(id, name, categoryId){
+    this.id = id;
     this.name = name;
     this.categoryId = categoryId;
   }

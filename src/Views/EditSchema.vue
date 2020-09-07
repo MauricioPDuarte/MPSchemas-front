@@ -31,6 +31,7 @@
                   v-model="file"
                   @change="readURL()"
                   :error-messages="errors"
+                   accept="application/pdf"
                 ></v-file-input>
               </ValidationProvider>
               <v-btn 
@@ -64,7 +65,7 @@
   import CategoryService from '../services/category.service';
 
   var data = {
-    schemaDTO: new SchemaDTO('', ''),
+    schemaDTO: new SchemaDTO(0, '', ''),
     file: '',
     pdfUrl: null,
     categories: [],
@@ -104,12 +105,15 @@
         SchemaService.insert(data)
           .then(() => {
             this.loadingForm = false;
-            this.schemaDTO = new SchemaDTO('', '');
+            this.schemaDTO = new SchemaDTO(0, '', '');
             this.file = '';
             this.pdfUrl = '';
             this.$refs.form.reset();
+
+            this.$notifier.showMessage({ content: 'Salvo com sucesso!', color: 'success' });
           })
           .catch((error) => {
+            console.log(error);
             this.loadingForm = false;
             this.errorInsertSchemaMsg = error.response.data.message;
           })

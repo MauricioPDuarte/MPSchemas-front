@@ -25,7 +25,7 @@ const routes = [
           component: UserSchemas
         },
         {
-          path: '/novoesquema',
+          path: 'esquema/novo',
           component: EditSchema
         }
       ]

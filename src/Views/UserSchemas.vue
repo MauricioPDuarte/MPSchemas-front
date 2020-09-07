@@ -64,10 +64,10 @@
               
             </v-col>
             <v-col class="text-right">
-              <v-btn fab color="green darken-2" small class="mr-2" >
+              <v-btn fab color="green darken-2" small class="mr-2" @click="handleListSchemas()">
                 <v-icon small>mdi-refresh</v-icon>
               </v-btn>
-              <v-btn fab color="primary" small class="mr-2" >
+              <v-btn fab color="primary" small class="mr-2" to="/esquema/novo">
                 <v-icon small>mdi-plus</v-icon>
               </v-btn>
             </v-col>
@@ -81,7 +81,6 @@
                 no-data-text="Nenhum esquema cadastrado" 
                 no-results-text="Nenhum esquema encontrado"
                 :loading="loadingList"
-                
               >
                 <template v-slot:[`item.category.name`]="{ item }">
                   <v-chip  small :color="item.category.color">{{ item.category.name }}</v-chip>
