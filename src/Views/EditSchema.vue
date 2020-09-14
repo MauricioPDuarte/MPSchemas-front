@@ -63,6 +63,7 @@
   import { ValidationObserver }  from 'vee-validate';
   import SchemaService from '../services/schema.service';
   import CategoryService from '../services/category.service';
+  import { mapActions } from 'vuex'
 
   var data = {
     schemaDTO: new SchemaDTO(0, '', ''),
@@ -84,6 +85,10 @@
     },
 
     methods: {
+      ...mapActions({
+        showSnack: 'snackbar/showSnack' 
+      }),
+
       readURL() {
         this.pdfUrl = URL.createObjectURL(this.file);
       },
@@ -110,7 +115,12 @@
             this.pdfUrl = '';
             this.$refs.form.reset();
 
-            this.$notifier.showMessage({ content: 'Salvo com sucesso!', color: 'success' });
+             this.showSnack({
+              content: 'Salvo com sucesso!',
+              color: 'success'
+             });
+
+           
           })
           .catch((error) => {
             console.log(error);
